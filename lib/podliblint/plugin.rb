@@ -17,38 +17,59 @@ module Danger
   #
   class DangerPodliblint < Plugin
 
-    def initialize(arg)
-      super
-      @warning_count = 0
-      @error_count = 0
-      @test_failures_count = 0
-    end
-
     # Allows you to specify a pod lib lint log file location to parse.
     attr_accessor :log_file
 
-    # Parses and exposes eventual warnings.
-    # @return   [warning_count]
+    # Allows you to specify if the pod lib lint log has been generated from fastlane.
+    attr_accessor :is_fastlane_report
+
+    # Allows you to specify the pod lib lint options.
+    # see pod lib lint --help for more information.
+    attr_accessor :options
+
+    # Parses and exposes eventual warnings, errors.
+    # @return   [failures]
     #
     def lint
 
       data = nil
 
-      if @log_file?
-        data = File.open(@log_file).read
+      if @log_file != nil
+          if @is_fastlane_report
+              require 'nokogiri'
+              @doc = Nokogiri::XML(File.open(@log_file))
+              data = @doc.at_xpath('//testcase[contains(@name, "pod_lib_lint")]/failure/@message').to_s
+          else
+              data = File.open(@log_file, 'r').read
+          end
       else
+        podliblint_command = "pod lib lint"
+        podliblint_command += " #{@options}" if @options
+
         require 'cocoapods'
-        data = pod lib lint
+        data = `#{podliblint_command}`
       end
 
-    end
+      # Looking for something like:
+      # [!] MyProject did not pass validation, due to 1 error and 1 warning.
+      lint_summary = data[/(?<=\[!\]\s).*/i]
 
-    def lint(data)
+      if lint_summary
+          fail("Pod lib lint: #{lint_summary} 🚨")
+          failures = data.scan(/(?<=ERROR\s\|\s).*|(?<=-\s)(?!NOTE|WARN|ERROR).*/i)
+          failures.each do |failure|
+              fail("`" << ((failure.strip! || failure).gsub!(/`/,"") || failure).to_s << "`")
+          end
+      else
+          message("Pod lib lint passed validation 🎊")
+      end
 
+      return failures
     end
 
     def self.instance_name
           to_s.gsub("Danger", "").danger_underscore.split("/").last
     end
+
   end
 end

@@ -1,0 +1,34 @@
+-> MyProject
+-> MyProject (0.1.0)
+
+   - WARN  | url: The URL (https://github.com/myProject/MyProject) is not reachable.
+
+   - ERROR | [iOS] unknown: Encountered an unknown error (Unable to satisfy the following requirements:
+
+
+
+- `SSZipArchive (= 1.2)` required by `MyProject/FileImportExport (0.1.0)`
+
+
+
+None of your spec sources contain a spec satisfying the dependency: `SSZipArchive (= 1.2)`.
+
+
+
+You have either:
+
+* out-of-date source repos which you can update with `pod repo update`.
+
+* mistyped the name or version.
+
+* not added the source repo that hosts the Podspec to your Podfile.
+
+
+
+Note: as of CocoaPods 1.0, `pod repo update` does not happen on `pod install` by default.) during validation.
+
+
+
+[!] MyProject did not pass validation, due to 1 error and 1 warning.
+
+You can use the `--no-clean` option to inspect any issue.

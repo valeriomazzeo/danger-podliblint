@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="fastlane.lanes">
+
+
+    <testcase classname="fastlane.lanes" name="0: Verifying required fastlane version" time="0.000455">
+
+    </testcase>
+
+
+    <testcase classname="fastlane.lanes" name="1: default_platform" time="0.000183">
+
+    </testcase>
+
+    <testcase classname="fastlane.lanes" name="2: pod_lib_lint" time="0.000183">
+      <failure message="-> MyProject&#10; -> MyProject (0.1.0)&#10;&#10; - WARN  | url: The URL (https://github.com/myProject/MyProject) is not reachable.&#10;&#10; - ERROR | [iOS] unknown: Encountered an unknown error (Unable to satisfy the following requirements:&#10;&#10; - `SSZipArchive (= 1.2)` required by `MyProject/FileImportExport (0.1.0)`&#10;&#10;&#10;&#10; None of your spec sources contain a spec satisfying the dependency: `SSZipArchive (= 1.2)`.&#10;&#10;&#10; You have either:&#10; * out-of-date source repos which you can update with `pod repo update`.&#10;&#10; * mistyped the name or version.&#10;&#10; * not added the source repo that hosts the Podspec to your Podfile.&#10;&#10;&#10;&#10; Note: as of CocoaPods 1.0, `pod repo update` does not happen on `pod install` by default.) during validation.&#10;&#10;&#10; [!] MyProject did not pass validation, due to 1 error and 1 warning.&#10;&#10; Note"></failure>
+      </testcase>
+
+    </testsuite>
+  </testsuites>
