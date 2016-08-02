@@ -10,6 +10,8 @@ A Danger plugin for Pod lib lint.
 
 ## Usage
 
+### Log file
+
 If a log file is specified `lint` will parse it, otherwise it will execute `pod lib lint` and parse the output.
 
 	# Optionally specify a log file:
@@ -17,6 +19,29 @@ If a log file is specified `lint` will parse it, otherwise it will execute `pod 
 
 	# Lint
 	podliblint.lint
+	
+### Fastlane Report
+
+If `pod lib lint` is executed as part of [Fastlane](https://fastlane.tools) is possible to parse the `JUnit` report instead:
+
+	# Specify the fastlane report file:
+	podliblint.log_file = "/fastlane/report.xml"
+	podliblint.is_fastlane_report = true
+	
+	# Lint
+	podliblint.lint
+	
+### Options
+
+Additional `pod lib lint` options can be specified through the `options` variable:
+
+	# Specify custom options
+	podliblint.options = "--allow-warnings --private"
+	
+	# Lint
+	podliblint.lint
+	
+**Note:** options are ignored when `log_file` is set.
 
 ## Development
 

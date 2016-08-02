@@ -15,6 +15,34 @@ module Danger
   # @see  valeriomazzeo/danger-podliblint
   # @tags pod, lib, lint, cocoapods
   #
+  # @example Ensure pod lib lint executes correctly as part of Fastlane
+  #
+  # If `pod lib lint` is executed as part of [Fastlane](https://fastlane.tools)
+  # is possible to parse the `JUnit` report instead:
+  #
+  #          # Specify the fastlane report file:
+	#          podliblint.log_file = "/fastlane/report.xml"
+	#          podliblint.is_fastlane_report = true
+  #
+  #          # Lint
+  #          podliblint.lint
+  #
+  # @see  valeriomazzeo/danger-podliblint
+  # @tags pod, lib, lint, cocoapods
+  #
+  # @example Ensure pod lib lint executes correctly with custom options
+  #
+  # Additional `pod lib lint` options can be specified through the `options` variable:
+  #
+  #          # Specify custom options
+	#          podliblint.options = "--allow-warnings --private"
+  #
+  #          # Lint
+  #          podliblint.lint
+  #
+  # @see  valeriomazzeo/danger-podliblint
+  # @tags pod, lib, lint, cocoapods
+  #
   class DangerPodliblint < Plugin
 
     # Allows you to specify a pod lib lint log file location to parse.
