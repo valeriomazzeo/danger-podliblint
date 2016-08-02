@@ -1,9 +1,9 @@
 PATH
   remote: .
   specs:
-    danger-podliblint (0.0.1)
+    danger-podliblint (0.0.2)
       cocoapods
-      danger (~> 2.0)
+      danger (~> 2.1)
       nokogiri
 
 GEM
