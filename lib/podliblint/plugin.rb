@@ -12,30 +12,24 @@ module Danger
   #          # Lint
   #          podliblint.lint
   #
-  # @see  valeriomazzeo/danger-podliblint
-  # @tags pod, lib, lint, cocoapods
-  #
   # @example Ensure pod lib lint executes correctly as part of Fastlane
   #
   # If `pod lib lint` is executed as part of [Fastlane](https://fastlane.tools)
   # is possible to parse the `JUnit` report instead:
   #
-  #          # Specify the fastlane report file:
-	#          podliblint.log_file = "/fastlane/report.xml"
-	#          podliblint.is_fastlane_report = true
+  #          # Specify a Fastlane report file:
+  #          podliblint.log_file = "/fastlane/report.xml"
+  #          podliblint.is_fastlane_report = true
   #
   #          # Lint
   #          podliblint.lint
-  #
-  # @see  valeriomazzeo/danger-podliblint
-  # @tags pod, lib, lint, cocoapods
   #
   # @example Ensure pod lib lint executes correctly with custom options
   #
   # Additional `pod lib lint` options can be specified through the `options` variable:
   #
   #          # Specify custom options
-	#          podliblint.options = "--allow-warnings --private"
+  #          podliblint.options = "--allow-warnings --private"
   #
   #          # Lint
   #          podliblint.lint
@@ -46,13 +40,19 @@ module Danger
   class DangerPodliblint < Plugin
 
     # Allows you to specify a pod lib lint log file location to parse.
+    # @return   [String]
+    #
     attr_accessor :log_file
 
     # Allows you to specify if the pod lib lint log has been generated from fastlane.
+    # @return   [Bool]
+    #
     attr_accessor :is_fastlane_report
 
     # Allows you to specify the pod lib lint options.
     # see pod lib lint --help for more information.
+    # @return   [String]
+    #
     attr_accessor :options
 
     # Parses and exposes eventual warnings, errors.
