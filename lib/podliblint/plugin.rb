@@ -80,7 +80,7 @@ module Danger
 
       # Looking for something like:
       # [!] MyProject did not pass validation, due to 1 error and 1 warning.
-      lint_summary = data[/(?<=\[!\]\s).*/i]
+      lint_summary = data[/(?<=\[!\]\s).*(did not pass validation|Unable to find a podspec).*/i]
 
       if lint_summary
           fail("Pod lib lint: #{lint_summary} 🚨")

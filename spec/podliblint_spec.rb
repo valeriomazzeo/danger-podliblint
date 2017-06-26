@@ -36,6 +36,15 @@ module Danger
           expect(@dangerfile.status_report[:markdowns]).to be_empty
         end
 
+        it "parses pod repo push data" do
+          @podliblint.log_file = "./spec/fixtures/podrepopush.log"
+          expect(@podliblint.lint).to be_nil
+          expect(@dangerfile.status_report[:messages].first).to eq("Pod lib lint passed validation 🎊")
+          expect(@dangerfile.status_report[:errors]).to be_empty
+          expect(@dangerfile.status_report[:warnings]).to be_empty
+          expect(@dangerfile.status_report[:markdowns]).to be_empty
+        end
+
         it "succeeds" do
           @podliblint.log_file = "./spec/fixtures/podliblint.log"
           expect(@podliblint.lint).to be_nil
