@@ -80,13 +80,13 @@ module Danger
 
       # Looking for something like:
       # [!] MyProject did not pass validation, due to 1 error and 1 warning.
-      lint_summary = data[/(?<=\[!\]\s).*(did not pass validation|Unable to find a podspec).*/i]
+      lint_summary = data[/(?<=\[!\]\s).*(did not pass validation|Unable to find a podspec|specification does not validate).*/i]
 
       if lint_summary
           fail("Pod lib lint: #{lint_summary} 🚨")
-          failures = data.scan(/(?<=ERROR\s\|\s).*|(?<=-\s)(?!NOTE|WARN|ERROR).*/i)
+          failures = data.scan(/(?<=ERROR\s\|\s).*/i)
           failures.each do |failure|
-              fail("`" << ((failure.strip! || failure).gsub!(/`/,"") || failure).to_s << "`")
+              fail("`" << ((failure.to_s.strip! || failure).to_s.gsub!(/`/,"") || failure).to_s << "`")
           end
       else
           message("Pod lib lint passed validation 🎊")
